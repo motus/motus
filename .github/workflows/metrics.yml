@@ -1,2 +1,16 @@
-- name: GitHub Workflows Metrics
-  uses: yykamei/github-workflows-metrics@v0.3.6
+name: GitHub Workflows Metrics
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 10 * * *"
+permissions:
+  actions: read
+  issues: write
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: yykamei/github-workflows-metrics@main
+        with:
+          only: ci.yml
+          status: success
